@@ -8,15 +8,19 @@ import {
 	CardContent,
 	Typography,
 	Button,
+	Tooltip,
 } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import cardBg from "./assets/cardBg.jpg";
 
 const DogGallery = () => {
+	// state variables for managing dogs data, search query, breed list
 	const [dogs, setDogs] = useState([]);
 	const [searchQuery, setSearchQuery] = useState("");
 	const [breeds, setBreeds] = useState([]);
 
+	// fetching dog data from the API
 	const getDogs = async () => {
 		const dogs = await fetchDogs();
 		setDogs(dogs);
@@ -27,10 +31,12 @@ const DogGallery = () => {
 		setBreeds(uniqueBreeds);
 	};
 
+	// hook to fetch dog data when the component mounts
 	useEffect(() => {
 		getDogs();
 	}, []);
 
+	// filtering dogs based on search query
 	const filteredDogs = dogs.filter((dog) =>
 		dog.breeds[0]?.name.toLowerCase().includes(searchQuery.toLowerCase()),
 	);
@@ -42,12 +48,12 @@ const DogGallery = () => {
 				gutterBottom
 				align="center"
 				fontSize="3rem"
-				fontFamily="georgia"
-				sx={{ marginBottom: "2rem" }}
+				sx={{ marginBottom: "2.5rem" }}
 			>
 				Dog Gallery
 			</Typography>
 
+			{/* for search bar and refresh button */}
 			<div
 				style={{
 					display: "flex",
@@ -65,21 +71,22 @@ const DogGallery = () => {
 							variant="filled"
 							fullWidth
 							onChange={(e) => setSearchQuery(e.target.value)}
-							sx={{ borderRadius: 5 }}
 						/>
 					)}
 					sx={{ flex: 1 }}
 				/>
-				<Button
-					variant="contained"
-					color="primary"
-					onClick={getDogs}
-					sx={{ height: "50px", borderRadius: 5 }}
-				>
-					Refresh
-				</Button>
+				<Tooltip title="Refresh">
+					<Button
+						onClick={getDogs}
+						variant="outlined"
+						sx={{ height: "50px", borderRadius: 8 }}
+					>
+						<RefreshIcon />
+					</Button>
+				</Tooltip>
 			</div>
 
+			{/* dog cards */}
 			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 				{filteredDogs.map((dog) => (
 					<Card
@@ -88,7 +95,6 @@ const DogGallery = () => {
 							boxShadow: 12,
 							borderRadius: 8,
 							backgroundImage: `linear-gradient(rgba(0, 0, 100, 1), rgba(0, 0, 100, 0.8), rgba(0, 0, 100, 0.6)), url(${cardBg})`,
-
 							backgroundSize: "contain",
 							backgroundPosition: "center",
 						}}

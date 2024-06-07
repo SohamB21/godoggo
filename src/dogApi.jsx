@@ -6,6 +6,7 @@ const API_KEY =
 	"live_M8cJP7tHNcq2qzrAbGlWXQA6ojaXE5zzRmzwlCaQpGzZlTV8JfRaHSSt7MChQ84E";
 
 export const fetchDogs = async () => {
+	// fetching the dog api with a try-catch block
 	try {
 		const response = await axios.get(DOG_API_URL, {
 			headers: {

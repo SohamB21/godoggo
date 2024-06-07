@@ -10,6 +10,7 @@ import {
 	Button,
 } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
+import cardBg from "./assets/cardBg.jpg";
 
 const DogGallery = () => {
 	const [dogs, setDogs] = useState([]);
@@ -84,9 +85,12 @@ const DogGallery = () => {
 					<Card
 						key={dog.id}
 						sx={{
-							boxShadow: 10,
-							borderRadius: 5,
-							backgroundImage: `linear-gradient(to bottom right, #eee9f1, #c6feff, #ffd295)`,
+							boxShadow: 12,
+							borderRadius: 8,
+							backgroundImage: `linear-gradient(rgba(0, 0, 100, 1), rgba(0, 0, 100, 0.8), rgba(0, 0, 100, 0.6)), url(${cardBg})`,
+
+							backgroundSize: "contain",
+							backgroundPosition: "center",
 						}}
 					>
 						<CardMedia
@@ -102,15 +106,22 @@ const DogGallery = () => {
 								gutterBottom
 								variant="h5"
 								component="div"
-								sx={{ fontFamily: "times" }}
+								sx={{
+									fontWeight: "bolder",
+									color: "white",
+								}}
 							>
 								{dog.breeds[0]?.name || "Unknown Breed"}
 							</Typography>
 							<Typography
-								variant="body1"
+								variant="body2"
 								color="textSecondary"
 								component="p"
-								sx={{ fontStyle: "italic" }}
+								sx={{
+									fontStyle: "italic",
+									fontWeight: "bold",
+									color: "white",
+								}}
 							>
 								{dog.breeds[0]?.temperament ||
 									"No temperament info"}

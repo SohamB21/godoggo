@@ -5,7 +5,7 @@
 * {
 	margin: 0;
 	padding: 0;
-	font-family: "Puppies Play", cursive;
+	/*font-family: "Puppies Play", cursive;*/
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
